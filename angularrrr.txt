@@ -26,7 +26,7 @@ export class TeamService {
   editPlayer(id: number, nwPlayer: Player) {
     const pi = this.team.findIndex(player=>player.id===id);
     this.team[pi]=nwPlayer;
-    this.teamChanged.emit(this.getTeam());
+    this.teamChanged.next(this.getTeam());
   }
 
 
@@ -44,7 +44,7 @@ export class TeamService {
 	}
 	else{
 		this.team.push(player);
-		this.teamChanged.emit(this.getTeam());
+		this.teamChanged.next(this.getTeam());
 	}
   }
 
@@ -58,7 +58,7 @@ export class TeamService {
   deletePlayer(id: number) {
     const pi = this.team.findIndex(player=>player.id===id);
     this.team.splice(pi,1);
-    this.teamChanged.emit(this.getTeam());
+    this.teamChanged.next(this.getTeam());
   }
 
 
@@ -164,7 +164,7 @@ export class PlayerService {
   addPlayer(player: Player) {
     player.id=this.generateID();
     this.players.push(player);
-    this.playersChanged.emit(this.getPlayers());
+    this.playersChanged.next(this.getPlayers());
   }
 
 
@@ -175,7 +175,7 @@ export class PlayerService {
   updatePlayer(id: number, newPlayer: Player) {
     const pi=this.players.findIndex(players=>players.id===id)
     this.players[pi]=newPlayer;
-    this.playersChanged.emit(this.getPlayer());
+    this.playersChanged.next(this.getPlayer());
   }
 
 
@@ -187,7 +187,7 @@ export class PlayerService {
     const pi=this.players.findIndex(player=>player.id===id)
     this.players.splice(pi,1);
     console.log('player deleted at index ',index)
-    this.playersChanged.emit(this.players.slice());
+    this.playersChanged.next(this.players.slice());
   }
 
 }
